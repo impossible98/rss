@@ -8,14 +8,17 @@ import (
 )
 
 const (
+	flagPortHelp    = "Show applicaion port"
 	flagVersionHelp = "Show application version"
 )
 
 func Init() {
 	var (
+		flagPort    string
 		flagVersion bool
 	)
 
+	flag.StringVar(&flagPort, "port", "8000", flagPortHelp)
 	flag.BoolVar(&flagVersion, "version", false, flagVersionHelp)
 
 	flag.Parse()
@@ -26,5 +29,5 @@ func Init() {
 	}
 
 	version()
-	web.Start()
+	web.Start(flagPort)
 }

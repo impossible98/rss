@@ -1,7 +1,26 @@
 // import "rss.app/constant"
 package constant
 
-const (
+import (
+	"bytes"
+	"os"
+)
+
+func readSecretFile(filename, fallback string) string {
+	data, err := os.ReadFile(filename)
+	if err != nil {
+		return fallback
+	}
+
+	value := string(bytes.TrimSpace(data))
+	if value == "" {
+		return fallback
+	}
+
+	return value
+}
+
+var (
 	App     = "RSS"
-	Version = "0.0.1"
+	Version = readSecretFile("VERSION", "1.0.0")
 )

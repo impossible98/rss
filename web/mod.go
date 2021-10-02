@@ -13,13 +13,14 @@ import (
 //go:embed public
 var public embed.FS
 
-func Start() {
+func Start(port string) {
 	address := config.Address
-	port := config.Port
 
 	logger.Info("RSS is serving on: http://%s:%s", address, port)
 	http.Handle("/", http.FileServer(getFileSystem()))
+
 	err := http.ListenAndServe(":"+port, nil)
+
 	if err != nil {
 		logger.Fatal("ListenAndServe fail:", err)
 	}
