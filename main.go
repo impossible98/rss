@@ -1,7 +1,10 @@
+// import "rss.app"
 package main
 
-import "fmt"
+import (
+	"rss.app/cli"
+)
 
-func  main()  {
-	fmt.Println("Hello World!")
+func main() {
+	cli.Init()
 }

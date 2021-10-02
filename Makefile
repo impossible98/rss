@@ -4,6 +4,7 @@
 all:
 
 build:
+	@gofmt -w .
 	@go build -o dist/rss main.go
 
 dev: \
