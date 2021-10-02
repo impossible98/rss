@@ -16,6 +16,6 @@ func Start() {
 	rh := http.RedirectHandler("https://www.bing.com", 307)
 	mux.Handle("/", rh)
 
-	logger.Info("Serving at: http://%s:%s", address, port)
+	logger.Info("RSS is serving on: http://%s:%s", address, port)
 	http.ListenAndServe(":"+port, mux)
 }
