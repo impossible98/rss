@@ -2,20 +2,34 @@
 package web
 
 import (
+	"embed"
+	"io/fs"
 	"net/http"
 
 	"rss.app/config"
 	"rss.app/logger"
 )
 
+//go:embed public
+var public embed.FS
+
 func Start() {
 	address := config.Address
 	port := config.Port
-	mux := http.NewServeMux()
-
-	rh := http.RedirectHandler("https://www.bing.com", 307)
-	mux.Handle("/", rh)
 
 	logger.Info("RSS is serving on: http://%s:%s", address, port)
-	http.ListenAndServe(":"+port, mux)
+	http.Handle("/", http.FileServer(getFileSystem()))
+	err := http.ListenAndServe(":"+port, nil)
+	if err != nil {
+		logger.Fatal("ListenAndServe fail:", err)
+	}
+}
+
+func getFileSystem() http.FileSystem {
+	fsys, err := fs.Sub(public, "public")
+	if err != nil {
+		panic(err)
+	}
+
+	return http.FS(fsys)
 }
