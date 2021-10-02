@@ -2,10 +2,11 @@
 package cli
 
 import (
+	"fmt"
+
 	"rss.app/constant"
-	"rss.app/logger"
 )
 
 func version() {
-	logger.Info(`%s Version: %s`, constant.App, constant.Version)
+	fmt.Printf("%s v%s\n", constant.App, constant.Version)
 }

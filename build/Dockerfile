@@ -18,10 +18,10 @@ RUN make build
 
 FROM golang
 
-ENV PORT=8000
+ENV PORT 80
 
 COPY --from=beta /src/dist/rss /app/rss
 
 EXPOSE $PORT
 
-CMD ["/app/rss"]
+CMD /app/rss --port $PORT

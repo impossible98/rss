@@ -18,7 +18,7 @@ func Init() {
 		flagVersion bool
 	)
 
-	flag.StringVar(&flagPort, "port", "8000", flagPortHelp)
+	flag.StringVar(&flagPort, "port", "80", flagPortHelp)
 	flag.BoolVar(&flagVersion, "version", false, flagVersionHelp)
 
 	flag.Parse()
